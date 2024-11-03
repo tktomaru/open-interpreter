@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  open-interpreter-gui:
+    container_name: open-interpreter-gui
+    build:
+      context : .
+      dockerfile: Dockerfile
+      target: production
+    # volumes:
+    #   # - ./nginx/let/log:/var/log/nginx
+    # ports:
+    #   - 80:80
+    #   - 443:443
+    # environment:
+    #   TZ: Asia/Tokyo
+    # command: "/bin/sh -c 'while :; do sleep 36h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    restart: always
+    tty: true # 継続して実行する設定：ポート待ち受けなどしていないと、コンテナがする終了してしまうためこの設定
+    # networks:
+    #   - tsubasa-network-prod
+# networks:
+#   tsubasa-network-prod:
+#     name: tsubasa-network-prod
+#     driver: bridge
+

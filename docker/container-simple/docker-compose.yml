@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  open-interpreter:
+    container_name: open-interpreter
+    build:
+      context : .
+      dockerfile: Dockerfile
+      target: production
+      args:
+        - HUGGINGFACE_PASS=${HUGGINGFACE_PASS}
+    volumes:
+      - ./models:/root/.config/open-interpreter/models
+      - ./models-hub:/root/.cache/huggingface/hub
+    # ports:
+    #   - 80:80
+    #   - 443:443
+    # environment:
+    #   TZ: Asia/Tokyo
+    # command: "/bin/sh -c 'while :; do sleep 36h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    # commnad: "/bin/bash"
+    restart: always
+    tty: true # 継続して実行する設定：ポート待ち受けなどしていないと、コンテナがする終了してしまうためこの設定
+    # networks:
+    #   - tsubasa-network-prod
+# networks:
+#   tsubasa-network-prod:
+#     name: tsubasa-network-prod
+#     driver: bridge
+
